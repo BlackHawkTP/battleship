@@ -27,18 +27,11 @@ letters_to_numbers = {
 
 # Создадим 3 случайных корабля
 def create_ships(board):
-    play_or_quit = str(input("Добро пожаловать в Морской бой, моряк-программист! \n"
-                             "Чтобы начать игру, напишите play или exit, чтобы выйти: "))
-    if play_or_quit == "play":
-        for ship in range(3):
-            ship_row, ship_column = randint(0, 4), randint(0, 4)
-            while board[ship_row][ship_column] == "X":
-                ship_row, ship_column = get_ship_location()
-            board[ship_row][ship_column] = "X"
-    elif play_or_quit == "exit":
-        quit()
-    else:
-        raise ValueError("Не было введено соответсвующее значение, завершаем работу!")
+    for ship in range(3):
+        ship_row, ship_column = randint(0, 4), randint(0, 4)
+        while board[ship_row][ship_column] == "X":
+            ship_row, ship_column = get_ship_location()
+        board[ship_row][ship_column] = "X"
 
 
 def get_ship_location():
@@ -64,7 +57,15 @@ def count_hit_ships(board):
 
 
 if __name__ == "__main__":
-    create_ships(HIDDEN_BOARD)
+    play_or_quit = str(input("Добро пожаловать в Морской бой, моряк-программист! \n"
+                             "Чтобы начать игру, напишите play или exit, чтобы выйти: "))
+    if play_or_quit == "play":
+        create_ships(HIDDEN_BOARD)
+    elif play_or_quit == "exit":
+        quit()
+    else:
+        raise ValueError("Не было введено соответсвующее значение, завершаем работу!")
+
     turns = 24
     while turns > 0:
         print('Угадайте, где находятся корабли')
